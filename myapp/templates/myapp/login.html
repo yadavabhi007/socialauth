@@ -1,0 +1,28 @@
+{% extends 'myapp/base.html' %}
+
+{% block content %}
+<div class="col sm-10">
+  <h2 class="text-white my-5">Login Page</h2>
+  <form action="" method="post" novalidate>
+    {% csrf_token %}
+    {% for fm in form %}
+    {{fm.label_tag}} {{fm}} {{fm.errors|striptags}} <br><br>
+    {% endfor %}
+    <input type="submit" value="Login" class="btn btn-primary">
+    {% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+    <p class="alert alert-danger my-2">{{error}}</p>
+    {% endfor %}
+    {% endif %}
+  </form>
+  <h2 class="btn btn-warning my-2">Not Registered ? <a href="{% url 'signup' %}">Sign Up</a></h2>
+  <br>
+  <p class="btn btn-success my-2"><strong>-- OR --</strong></p>
+  <br>
+  <h2 class="btn btn-dark my-2"><a href="{% url 'social:begin' 'github' %}">Login with Github</a></h2>
+  <br>
+  <h2 class="btn btn-dark my-2"><a href="{% url 'social:begin' 'twitter' %}">Login with Twitter</a></h2>
+  <br>
+  <h2 class="btn btn-dark my-2"><a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a></h2>
+</div>
+{% endblock content %}
